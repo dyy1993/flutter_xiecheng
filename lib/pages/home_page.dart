@@ -181,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                   : SearchBarType.home,
               inputBoxClick: _jumpToSearch,
               // speakClick: _jumpToSpeak,
-              defaultText: "蔚来汽车",
+              defaultText: "上海攻略·游记·精选酒店",
               leftButtonClick: () {},
             ),
           ),

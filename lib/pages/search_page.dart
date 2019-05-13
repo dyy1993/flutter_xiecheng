@@ -35,7 +35,7 @@ class SearchPage extends StatefulWidget {
   _SearchPageState createState() => _SearchPageState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+class _SearchPageState extends State<SearchPage> with AutomaticKeepAliveClientMixin{
   SearchModel searchModel;
   String keyword;
 
@@ -93,17 +93,12 @@ class _SearchPageState extends State<SearchPage> {
         padding: EdgeInsets.only(top: 40),
         decoration: BoxDecoration(color: Colors.white),
         child: SearchBar(
-          hideLeft: widget.hideLeft,
+          hideLeft: true,
           searchBarType: SearchBarType.normal,
           onChanged: _onTextChange,
-          leftButtonClick: _leftButtonClick,
           defaultText: widget.keyword,
           hint: '请输入搜索内容',
         ));
-  }
-
-  _leftButtonClick() {
-    Navigator.pop(context);
   }
 
   _item(int index) {
@@ -230,4 +225,8 @@ class _SearchPageState extends State<SearchPage> {
     }
     return spans;
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

@@ -23,7 +23,7 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
   double _appBarOpacity = 0;
   String resultString = "";
   ConfigModel _config;
@@ -198,4 +198,8 @@ class _HomePageState extends State<HomePage> {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => SearchPage(hideLeft: false,keyword: '上海',)));
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

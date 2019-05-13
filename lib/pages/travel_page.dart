@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/dao/travel_dao.dart';
 import 'package:flutter_demo/model/travel_tab_model.dart';
+import 'package:flutter_demo/pages/travel_item_page.dart';
 
 class TravelPage extends StatefulWidget {
   @override
@@ -8,16 +9,19 @@ class TravelPage extends StatefulWidget {
 }
 
 class _TravelPageState extends State<TravelPage>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin , AutomaticKeepAliveClientMixin{
   TabController _tabController;
   List<TravelTab> tabs = [];
-
+  TravelTabModel travelTabModel;
   @override
   void initState() {
     _tabController = TabController(length: 0, vsync: this);
     TravelDao.fetchTab().then((TravelTabModel tabModel) {
       _tabController = TabController(length: tabModel.tabs.length, vsync: this);
+    
+
       setState(() {
+                travelTabModel = tabModel;
         tabs = tabModel.tabs;
       });
     }).catchError((e) {});
@@ -53,11 +57,16 @@ class _TravelPageState extends State<TravelPage>
           child: TabBarView(
             controller: _tabController,
             children: tabs.map((TravelTab tab) {
-              return Text(tab.labelName);
+              print(travelTabModel.url);
+              return TravelItemPage(url: travelTabModel.url, params: travelTabModel.params, channel: tab.groupChannelCode);
             }).toList(),
           ),
         ))
       ],
     ));
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/widget/webview.dart';
 
 class MyPage extends StatefulWidget {
   @override
@@ -6,18 +7,11 @@ class MyPage extends StatefulWidget {
 }
 
 class _MyPageState extends State<MyPage> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-      child: InkWell(
-        onTap: (){
-           
-        },
-        child: Text('请求'),
-      ),
+      child: Text('我的'),
     ));
   }
 }

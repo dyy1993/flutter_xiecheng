@@ -25,7 +25,7 @@ class WebView extends StatefulWidget {
   _WebViewState createState() => _WebViewState();
 }
 
-class _WebViewState extends State<WebView> with AutomaticKeepAliveClientMixin{
+class _WebViewState extends State<WebView> with AutomaticKeepAliveClientMixin {
   final webViewReference = FlutterWebviewPlugin();
   StreamSubscription<String> _onUrlChanged;
   StreamSubscription<WebViewStateChanged> _onStateChanged;
@@ -63,6 +63,8 @@ class _WebViewState extends State<WebView> with AutomaticKeepAliveClientMixin{
     _onUrlChanged.cancel();
     _onHttpError.cancel();
     _onStateChanged.cancel();
+    webViewReference.dispose();
+
     super.dispose();
   }
 
@@ -123,31 +125,29 @@ class _WebViewState extends State<WebView> with AutomaticKeepAliveClientMixin{
       child: FractionallySizedBox(
         widthFactor: 1,
         child: Stack(
-        children: <Widget>[
-          GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Container(
-              margin: EdgeInsets.only(left: 20),
-              child: Icon(
-                Icons.close,
-                size: 20,
+          children: <Widget>[
+            GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+                margin: EdgeInsets.only(left: 20),
+                child: Icon(
+                  Icons.close,
+                  size: 20,
+                ),
               ),
             ),
-          ),
-          Positioned(
-            left: 0,
-            right: 0,
-            child: Center(
-            child: Text(widget.title),
-          ),
-          )
-          
-        ],
+            Positioned(
+              left: 0,
+              right: 0,
+              child: Center(
+                child: Text(widget.title),
+              ),
+            )
+          ],
+        ),
       ),
-      ),
-      
     );
   }
 
